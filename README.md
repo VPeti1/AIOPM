@@ -3,8 +3,8 @@ An all in one package manager for linux
 
 ## How to install
 # Download the latest version
-## Type in chmod +x ./AIOPM.out
-## Type in ./AIOPM.out
+# Type in chmod +x ./AIOPM.out
+# Type in ./AIOPM.out
 
 ## How to build with g++
 # Clone the repo
