@@ -10,5 +10,5 @@ An all in one package manager for linux
 # Manages apt,yum,pacman and flatpak with (really) easy syntax
 
 # Known issues
-## Error: ./AIOPM.out: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by ./OpenCW.out)
+## Error: ./AIOPM.out: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by ./AIOMP.out)
 Fix: compile the source code yourself with g++. 
