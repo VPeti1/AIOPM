@@ -15,6 +15,32 @@ void welcome() {
     std::cout << "Avalible commands:'update','install','remove','exit' " << std::endl;
     std::cout << "Type 'flatpak' for managing flatpak" << std::endl;
 }
+void archwelcome() {
+    std::cout << "Type in 'aur' to download packages from the AUR" << std::endl;
+}
+
+void aur() {
+    clear
+    //Aur downloader 
+    std::string input;
+    std::cout << "Enter packages name(s): ";
+    std::cin >> input;
+    if (input == "exit" || input == "Exit") {
+        std::cout << "Exiting..." << std::endl;
+    }
+    else {
+    std::cout << "Installing " << input << "..." << std::endl;
+    //makes sure the directory is writable
+    system("sudo chown -R $USER /usr/aiopm");
+    //clones the repository to /usr/aiopm/nameoftherepo
+    system(("git clone https://aur.archlinux.org/" + input + ".git " + "/usr/aiopm/" + input ).c_str());
+    //makes the package
+    system(("cd /usr/aiopm/" + input + " && makepkg -si").c_str());
+    std::cout << "Installation complete!" << std::endl;
+    system("read -p 'Press Enter to continue...'");
+    }
+    
+}
 
 void debianinstall() {
     std::cout << "Setting configuration for Debian" << std::endl;
@@ -29,6 +55,7 @@ void debianinstall() {
 void flatpak() {
     clear
     std::cout << "You are now managing flatpak" << std::endl;
+    std::cout << "Avalible commands:'update','install','remove','exit' " << std::endl;
     //Idk whose gonna use this but is here 
     std::string input;
     std::cin >> input;
@@ -65,6 +92,43 @@ void flatpak() {
 
 
 }
+
+void snap() {
+    clear
+    std::cout << "You are now managing snap" << std::endl;
+    std::cout << "Avalible commands:'install','remove','exit' " << std::endl;
+    //Idk whose gonna use either this but is here 
+    std::string input;
+    std::cin >> input;
+    if (input == "install" || input == "Install") {
+            //this is defenetly not from OpenCW
+            //developers never copy :)
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo snap install " + input).c_str());
+    }
+    else if (input == "remove" || input == "Remove") {
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo snap remove " + input).c_str());
+    }
+
+    else if (input == "exit" || input == "Exit") {
+        clear
+    }
+
+    else{
+        std::cout << "Invalid input! Retrying" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+        flatpak();
+    }
+
+}
+
 void fallback() {
     std::string input;
     std::cin >> input;
@@ -135,6 +199,11 @@ void arch() {
             std::cin >> input;
             system(("sudo pacman -R " + input).c_str());
     }
+    else if (input == "aur" || input == "AUR") {
+        aur();
+        arch();
+    }
+    
 
     else if (input == "exit" || input == "Exit") {
         clear
@@ -244,6 +313,7 @@ void fed() {
 }
 
 void fst() {
+    clear
     //fst means first time setup
     std::cout << "Welcome to AIOPM Setup! " << std::endl;
     std::string input;
@@ -286,6 +356,7 @@ void fst() {
 
 
 int main() {
+    clear
     //Splash screen
     std::cout << " $$$$$$\\  $$$$$$\\  $$$$$$\\  $$$$$$$\\  $$\\      $$\\ \n"
                  "$$  __$$\\ \\_$$  _|$$  __$$\\ $$  __$$\\ $$$\\    $$$ |\n"
@@ -303,6 +374,7 @@ int main() {
     if (file.is_open()) {
         file.close();
         welcome();
+        archwelcome();
         arch();
     } else {
     //debian file
