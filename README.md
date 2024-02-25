@@ -2,9 +2,13 @@
 An all in one package manager for linux
 
 # How to install
-## Download the latest version
-## Type in chmod +x AIOPM.out
-## Type in ./AIOPM.out
+## Download the latest installer
+## Type in "chmod +x installer.out"
+## Type in "./installer.out"
+## AIOPM is now added to PATH and you can run it by typing in 'aiopm' on your terminal
+
+# How to uninstall
+## Type in "sudo rm -r /bin/aiopm"
 
 # How to build with g++
 ## Clone the repo
