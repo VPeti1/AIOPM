@@ -173,6 +173,100 @@ void fallback() {
 
 }
 
+void voidl() {
+     std::string input;
+    std::cin >> input;
+    if (input == "update" || input == "Update") {
+        clear
+        system("sudo xbps-install -Su");
+    }
+    else if (input == "install" || input == "Install") {
+            //this is defenetly not from OpenCW
+            //developers never copy :)
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo xbps-install " + input).c_str());
+    }
+    else if (input == "remove" || input == "Remove") {
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo xbps-remove " + input).c_str());
+    }
+
+    else if (input == "exit" || input == "Exit") {
+        clear
+        std::cout << "Exiting..." << std::endl;
+        system("exit");
+
+    }
+    else if (input == "flatpak" || input == "Flatpak") {
+        flatpak();
+        voidl();
+    }
+    else if (input == "snap" || input == "Snap") {
+        snap();
+        voidl();
+    }
+    
+
+    else{
+        std::cout << "Invalid input! Retrying" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+        voidl();
+    }
+}
+
+void opensuse() {
+    std::string input;
+    std::cin >> input;
+    if (input == "update" || input == "Update") {
+        clear
+        system("sudo zypper update");
+    }
+    else if (input == "install" || input == "Install") {
+            //this is defenetly not from OpenCW
+            //developers never copy :)
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo zypper install " + input).c_str());
+    }
+    else if (input == "remove" || input == "Remove") {
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("sudo zypper remove " + input).c_str());
+    }
+
+    else if (input == "exit" || input == "Exit") {
+        clear
+        std::cout << "Exiting..." << std::endl;
+        system("exit");
+
+    }
+    else if (input == "flatpak" || input == "Flatpak") {
+        flatpak();
+        opensuse();
+    }
+    else if (input == "snap" || input == "Snap") {
+        snap();
+        opensuse();
+    }
+    
+
+    else{
+        std::cout << "Invalid input! Retrying" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+        opensuse();
+    }
+}
+
 
 
 void arch() {
@@ -201,6 +295,10 @@ void arch() {
     }
     else if (input == "aur" || input == "AUR") {
         aur();
+        arch();
+    }
+    else if (input == "snap" || input == "Snap") {
+        snap();
         arch();
     }
     
@@ -260,6 +358,10 @@ void deb() {
         flatpak();
         deb();
     }
+    else if (input == "snap" || input == "Snap") {
+        snap();
+        deb();
+    }
     
 
     else{
@@ -303,6 +405,10 @@ void fed() {
         flatpak();
         fed();
     }
+    else if (input == "snap" || input == "Snap") {
+        snap();
+        fed();
+    }
     
 
     else{
@@ -318,7 +424,7 @@ void fst() {
     std::cout << "Welcome to AIOPM Setup! " << std::endl;
     std::string input;
     std::cout << "What distro are you using?" << std::endl;
-    std::cout << "(arch,debian,fedora)" << std::endl;
+    std::cout << "(arch,debian,fedora,opensuse or void)" << std::endl;
     std::cout << "(Derivatives included)" << std::endl;
     //derivatives like ubuntu,mint...
     std::cin >> input;
@@ -336,6 +442,14 @@ void fst() {
         system("sudo mkdir /usr/aiopm");
         system("sudo touch /usr/aiopm/a3.cw");
         //creates files for fedora
+    }
+    if (input == "opensuse" || input == "Opensuse") {
+        system("sudo mkdir /usr/aiopm");
+        system("sudo touch /usr/aiopm/a4.cw");
+    }
+    if (input == "void" || input == "Void") {
+        system("sudo mkdir /usr/aiopm");
+        system("sudo touch /usr/aiopm/a5.cw");
     }
     if (input == "exit" || input == "Exit") {
         std::cout << "Exiting..." << std::endl;
@@ -393,9 +507,27 @@ int main() {
         fed();
     }
     else {
+    //opensuse file
+    std::ifstream file("/usr/aiopm/a4.cw");
+    if (file.is_open()) {
+        file.close();
+        welcome();
+        opensuse();
+    }
+    else {
+    //fedora file
+    std::ifstream file("/usr/aiopm/a5.cw");
+    if (file.is_open()) {
+        file.close();
+        welcome();
+        voidl();
+    }
+    else {
         //no file so first time setup
         fst();
         main();
+    }
+    }
     }
     
     }
