@@ -14,6 +14,8 @@ void welcome() {
     std::cout << "Welcome to the AIOPM!" << std::endl;
     std::cout << "Avalible commands:'update','install','remove','exit' " << std::endl;
     std::cout << "Type 'flatpak' for managing flatpak" << std::endl;
+    std::cout << "Type 'snap' for managing snap" << std::endl;
+    std::cout << "Type 'pip' for managing pip" << std::endl;
 }
 void archwelcome() {
     std::cout << "Type in 'aur' to download packages from the AUR" << std::endl;
