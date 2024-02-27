@@ -93,6 +93,43 @@ void flatpak() {
 
 }
 
+void pip() {
+    clear
+    std::cout << "You are now managing pip" << std::endl;
+    std::cout << "Avalible commands:'install','remove','exit' " << std::endl;
+    //Idk whose gonna use this but is here 
+    std::string input;
+    std::cin >> input;
+    if (input == "install" || input == "Install") {
+            //this is defenetly not from OpenCW
+            //developers never copy :)
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("pip install " + input).c_str());
+    }
+    else if (input == "remove" || input == "Remove") {
+            clear
+            std::string input;
+            std::cout << "Enter packages name(s): ";
+            std::cin >> input;
+            system(("pip uninstall " + input).c_str());
+    }
+
+    else if (input == "exit" || input == "Exit") {
+        clear
+    }
+
+    else{
+        std::cout << "Invalid input! Retrying" << std::endl;
+        system("read -p 'Press Enter to continue...'");
+        flatpak();
+    }
+
+
+}
+
 void snap() {
     clear
     std::cout << "You are now managing snap" << std::endl;
@@ -160,11 +197,6 @@ void fallback() {
         system("exit");
 
     }
-    else if (input == "flatpak" || input == "Flatpak") {
-        flatpak();
-    }
-    
-
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
@@ -205,6 +237,10 @@ void voidl() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        voidl();
+    }
+    else if (input == "pip" || input == "Pip") {
+        pip();
         voidl();
     }
     else if (input == "snap" || input == "Snap") {
@@ -254,6 +290,10 @@ void opensuse() {
         flatpak();
         opensuse();
     }
+    else if (input == "pip" || input == "Pip") {
+        pip();
+        opensuse();
+    }
     else if (input == "snap" || input == "Snap") {
         snap();
         opensuse();
@@ -295,6 +335,10 @@ void arch() {
     }
     else if (input == "aur" || input == "AUR") {
         aur();
+        arch();
+    }
+    else if (input == "pip" || input == "Pip") {
+        pip();
         arch();
     }
     else if (input == "snap" || input == "Snap") {
@@ -362,6 +406,10 @@ void deb() {
         snap();
         deb();
     }
+    else if (input == "pip" || input == "Pip") {
+        pip();
+        deb();
+    }
     
 
     else{
@@ -407,6 +455,10 @@ void fed() {
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        fed();
+    }
+    else if (input == "pip" || input == "Pip") {
+        pip();
         fed();
     }
     
