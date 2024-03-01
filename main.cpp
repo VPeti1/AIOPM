@@ -19,6 +19,7 @@ void welcome() {
 }
 void archwelcome() {
     std::cout << "Type in 'aur' to download packages from the AUR" << std::endl;
+    std::cout << "Type in 'mremove' to remove multiple packages ()" << std::endl;
 }
 
 void aur() {
@@ -64,6 +65,7 @@ void flatpak() {
     if (input == "update" || input == "Update") {
         clear
         system("flatpak update");
+        flatpak();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -73,6 +75,7 @@ void flatpak() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("flatpak install " + input).c_str());
+            flatpak();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -80,6 +83,7 @@ void flatpak() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("flatpak remove " + input).c_str());
+            flatpak();
     }
 
     else if (input == "exit" || input == "Exit") {
@@ -110,6 +114,7 @@ void pip() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("pip install " + input).c_str());
+            pip();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -117,6 +122,7 @@ void pip() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("pip uninstall " + input).c_str());
+            pip();
     }
 
     else if (input == "exit" || input == "Exit") {
@@ -126,7 +132,7 @@ void pip() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
-        flatpak();
+        pip();
     }
 
 
@@ -147,6 +153,7 @@ void snap() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo snap install " + input).c_str());
+            snap();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -154,6 +161,7 @@ void snap() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo snap remove " + input).c_str());
+            snap();
     }
 
     else if (input == "exit" || input == "Exit") {
@@ -163,46 +171,7 @@ void snap() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
-        flatpak();
-    }
-
-}
-
-void fallback() {
-    std::string input;
-    std::cin >> input;
-    if (input == "update" || input == "Update") {
-        clear
-        system("sudo apt update");
-        system("sudo apt upgrade");
-    }
-    else if (input == "install" || input == "Install") {
-            //this is defenetly not from OpenCW
-            //developers never copy :)
-            clear
-            std::string input;
-            std::cout << "Enter packages name(s): ";
-            std::cin >> input;
-            system(("sudo apt install " + input).c_str());
-    }
-    else if (input == "remove" || input == "Remove") {
-            clear
-            std::string input;
-            std::cout << "Enter packages name(s): ";
-            std::cin >> input;
-            system(("sudo apt purge " + input).c_str());
-    }
-
-    else if (input == "exit" || input == "Exit") {
-        clear
-        std::cout << "Exiting..." << std::endl;
-        system("exit");
-
-    }
-    else{
-        std::cout << "Invalid input! Retrying" << std::endl;
-        system("read -p 'Press Enter to continue...'");
-        fallback();
+        snap();
     }
 
 }
@@ -213,6 +182,7 @@ void voidl() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo xbps-install -Su");
+        voidl();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -222,6 +192,7 @@ void voidl() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo xbps-install " + input).c_str());
+            voidl();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -229,6 +200,7 @@ void voidl() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo xbps-remove " + input).c_str());
+            voidl();
     }
 
     else if (input == "exit" || input == "Exit") {
@@ -264,6 +236,7 @@ void opensuse() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo zypper update");
+        opensuse();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -273,6 +246,7 @@ void opensuse() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo zypper install " + input).c_str());
+            opensuse();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -280,6 +254,7 @@ void opensuse() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo zypper remove " + input).c_str());
+            opensuse();
     }
 
     else if (input == "exit" || input == "Exit") {
@@ -318,6 +293,7 @@ void arch() {
         clear
         system("sudo pacman -Syy");
         system("sudo pacman -Syu");
+        arch();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -327,6 +303,7 @@ void arch() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo pacman -S " + input).c_str());
+            arch();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -334,6 +311,7 @@ void arch() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo pacman -R " + input).c_str());
+            arch();
     }
     else if (input == "aur" || input == "AUR") {
         aur();
@@ -345,6 +323,15 @@ void arch() {
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        arch();
+    }
+
+    else if (input == "mremove" || input == "Mremove") {
+        clear
+        std::string input;
+        std::cout << "Enter packages name(s): ";
+        std::cin >> input;
+        system((" sudo pacman -R $(pacman -Qq | grep " + input + ")").c_str());
         arch();
     }
     
@@ -374,6 +361,7 @@ void deb() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo nala update");
+        deb();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -383,6 +371,7 @@ void deb() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo nala install " + input).c_str());
+            deb();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -390,15 +379,13 @@ void deb() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo nala remove " + input).c_str());
+            deb();
     }
 
     else if (input == "exit" || input == "Exit") {
         clear
         std::cout << "Exiting..." << std::endl;
         system("exit");
-    }
-    else if (input == "fallback" || input == "Fallback") {
-        fallback();
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
@@ -427,6 +414,7 @@ void fed() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo yum update");
+        fed();
     }
     else if (input == "install" || input == "Install") {
             //this is defenetly not from OpenCW
@@ -436,6 +424,7 @@ void fed() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo yum install " + input).c_str());
+            fed();
     }
     else if (input == "remove" || input == "Remove") {
             clear
@@ -443,6 +432,7 @@ void fed() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo yum remove " + input).c_str());
+            fed();
     }
 
     else if (input == "exit" || input == "Exit") {
