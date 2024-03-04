@@ -1,0 +1,7 @@
+## FLEXPKG Format Version 1 By VPeti
+
+pkg = wget
+get = https://raw.githubusercontent.com/VPeti1/CWAcces/main/AIOPM.out -O AIOPM.out
+cmd = sudo cp -r AIOPM.out /bin/aiopm
+cmd2 = sudo chmod +x /bin/aiopm
+cmd3 = echo AIOPM Installer Completed!
