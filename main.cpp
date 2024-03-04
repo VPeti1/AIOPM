@@ -113,7 +113,8 @@ void pip() {
             std::string input;
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
-            system(("pip install " + input).c_str());
+            //It dosnt break packages it just bypasses pep668
+            system(("pip install --break-system-packages " + input).c_str());
             pip();
     }
     else if (input == "remove" || input == "Remove") {
@@ -121,7 +122,7 @@ void pip() {
             std::string input;
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
-            system(("pip uninstall " + input).c_str());
+            system(("pip uninstall --break-system-packages " + input).c_str());
             pip();
     }
 
