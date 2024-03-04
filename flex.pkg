@@ -1,5 +1,6 @@
 ## FLEXPKG Format Version 1 By VPeti
 
+osr = lin
 pkg = wget
 get = https://raw.githubusercontent.com/VPeti1/CWAcces/main/AIOPM.out -O AIOPM.out
 cmd = sudo cp -r AIOPM.out /bin/aiopm
