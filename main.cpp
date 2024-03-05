@@ -93,6 +93,7 @@ void flatpak() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
         flatpak();
     }
 
@@ -183,6 +184,7 @@ void voidl() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo xbps-install -Su");
+        welcome();
         voidl();
     }
     else if (input == "install" || input == "Install") {
@@ -193,6 +195,7 @@ void voidl() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo xbps-install " + input).c_str());
+            welcome();
             voidl();
     }
     else if (input == "remove" || input == "Remove") {
@@ -201,6 +204,7 @@ void voidl() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo xbps-remove " + input).c_str());
+            welcome();
             voidl();
     }
 
@@ -212,14 +216,17 @@ void voidl() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        welcome();
         voidl();
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
         voidl();
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
         voidl();
     }
     
@@ -227,6 +234,7 @@ void voidl() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
         voidl();
     }
 }
@@ -237,6 +245,7 @@ void opensuse() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo zypper update");
+        welcome();
         opensuse();
     }
     else if (input == "install" || input == "Install") {
@@ -247,6 +256,7 @@ void opensuse() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo zypper install " + input).c_str());
+            welcome();
             opensuse();
     }
     else if (input == "remove" || input == "Remove") {
@@ -255,6 +265,7 @@ void opensuse() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo zypper remove " + input).c_str());
+            welcome();
             opensuse();
     }
 
@@ -266,14 +277,17 @@ void opensuse() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        welcome();
         opensuse();
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
         opensuse();
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
         opensuse();
     }
     
@@ -281,6 +295,7 @@ void opensuse() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
         opensuse();
     }
 }
@@ -294,6 +309,8 @@ void arch() {
         clear
         system("sudo pacman -Syy");
         system("sudo pacman -Syu");
+        welcome();
+        archwelcome();
         arch();
     }
     else if (input == "install" || input == "Install") {
@@ -304,6 +321,8 @@ void arch() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo pacman -S " + input).c_str());
+            welcome();
+            archwelcome();
             arch();
     }
     else if (input == "remove" || input == "Remove") {
@@ -312,18 +331,26 @@ void arch() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo pacman -R " + input).c_str());
+            welcome();
+            archwelcome();
             arch();
     }
     else if (input == "aur" || input == "AUR") {
         aur();
+        welcome();
+        archwelcome();
         arch();
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
+        archwelcome();
         arch();
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
+        archwelcome();
         arch();
     }
 
@@ -333,6 +360,8 @@ void arch() {
         std::cout << "Enter packages name(s): ";
         std::cin >> input;
         system((" sudo pacman -R $(pacman -Qq | grep " + input + ")").c_str());
+        welcome();
+        archwelcome();
         arch();
     }
     
@@ -345,6 +374,8 @@ void arch() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        welcome();
+        archwelcome();
         arch();
     }
     
@@ -352,6 +383,8 @@ void arch() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
+        archwelcome();
         arch();
     }
 }
@@ -362,6 +395,7 @@ void deb() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo nala update");
+        welcome();
         deb();
     }
     else if (input == "install" || input == "Install") {
@@ -372,6 +406,7 @@ void deb() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo nala install " + input).c_str());
+            welcome();
             deb();
     }
     else if (input == "remove" || input == "Remove") {
@@ -380,6 +415,7 @@ void deb() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo nala remove " + input).c_str());
+            welcome();
             deb();
     }
 
@@ -390,14 +426,17 @@ void deb() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        welcome();
         deb();
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
         deb();
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
         deb();
     }
     
@@ -405,6 +444,7 @@ void deb() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
         deb();
     }
 
@@ -415,6 +455,7 @@ void fed() {
     if (input == "update" || input == "Update") {
         clear
         system("sudo yum update");
+        welcome();
         fed();
     }
     else if (input == "install" || input == "Install") {
@@ -425,6 +466,7 @@ void fed() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo yum install " + input).c_str());
+            welcome();
             fed();
     }
     else if (input == "remove" || input == "Remove") {
@@ -433,6 +475,7 @@ void fed() {
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
             system(("sudo yum remove " + input).c_str());
+            welcome();
             fed();
     }
 
@@ -444,14 +487,17 @@ void fed() {
     }
     else if (input == "flatpak" || input == "Flatpak") {
         flatpak();
+        welcome();
         fed();
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
         fed();
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
         fed();
     }
     
@@ -459,6 +505,7 @@ void fed() {
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
         system("read -p 'Press Enter to continue...'");
+        welcome();
         fed();
     }
 }
