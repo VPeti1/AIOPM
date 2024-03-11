@@ -526,27 +526,22 @@ void fst() {
         system("sudo touch /usr/aiopm/a1.cw");
         //creates files for arch
     }
-    if (input == "debian" || input == "Debian") {
+    else if (input == "debian" || input == "Debian") {
         debianinstall();
     }
-    if (input == "fedora" || input == "Fedora") {
+    else if (input == "fedora" || input == "Fedora") {
         std::cout << "Setting configuration for Fedora" << std::endl;
         system("sudo mkdir /usr/aiopm");
         system("sudo touch /usr/aiopm/a3.cw");
         //creates files for fedora
     }
-    if (input == "opensuse" || input == "Opensuse") {
+    else if (input == "opensuse" || input == "Opensuse") {
         system("sudo mkdir /usr/aiopm");
         system("sudo touch /usr/aiopm/a4.cw");
     }
-    if (input == "void" || input == "Void") {
+    else if (input == "void" || input == "Void") {
         system("sudo mkdir /usr/aiopm");
         system("sudo touch /usr/aiopm/a5.cw");
-    }
-    if (input == "exit" || input == "Exit") {
-        std::cout << "Exiting..." << std::endl;
-        system("exit");
-        //do i have to explain?????????????????
     }
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
