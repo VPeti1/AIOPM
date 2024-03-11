@@ -9,6 +9,40 @@
 #define clear std::cout << "\033[2J\033[1;1H";
 using namespace std;
 
+
+void newpm() {
+    std::ifstream file("/bin/pm");
+    //Checks is AIOPM Plus is installed
+    if (file.is_open()) {
+        file.close();
+        std::cout << "New AIOPM is already installed!";
+
+    } else {
+        file.close();
+        std::cout << "Installing new AIOPM";
+        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/installer.ut -O /usr/aiopmi/new.out");
+        system("sudo chmod +x /usr/aiopmi/new.out");
+        system("/usr/aiopmi/new.out");
+        sleep(0.5);
+        std::cout << "Returning to main menu...";
+    }
+    
+
+}
+
+void checknew() {
+    std::ifstream file("/bin/pm");
+    //Checks is AIOPM Plus is installed
+    if (file.is_open()) {
+        file.close();
+
+    } else {
+    file.close();
+    std::cout << "Type 'new' to install AIOPM Plus" << std::endl;
+}
+}
+
+
 void welcome() {
     clear
     std::cout << "Welcome to the AIOPM!" << std::endl;
@@ -16,6 +50,7 @@ void welcome() {
     std::cout << "Type 'flatpak' for managing flatpak" << std::endl;
     std::cout << "Type 'snap' for managing snap" << std::endl;
     std::cout << "Type 'pip' for managing pip" << std::endl;
+    checknew();
 }
 void archwelcome() {
     std::cout << "Type in 'aur' to download packages from the AUR" << std::endl;
@@ -43,17 +78,6 @@ void aur() {
     system("read -p 'Press Enter to continue...'");
     }
     
-}
-
-void debianinstall() {
-    std::cout << "Setting configuration for Debian" << std::endl;
-    system("sudo mkdir /usr/aiopm");
-    system("sudo touch /usr/aiopm/a2.cw");
-    //creates files for debian
-    system("sudo apt install wget python3-apt python3-debian pandoc -y");
-    system("sudo wget https://gitlab.com/volian/nala/uploads/0de9fe419f0792084bb1f170a9122d65/nala_0.15.1_all.deb -o /usr/aiopm/nala.deb");
-    system("sudo dpkg -i /usr/aiopm/nala.deb");
-    //installs nala
 }
 void flatpak() {
     clear
@@ -229,6 +253,11 @@ void voidl() {
         welcome();
         voidl();
     }
+    else if (input == "new" || input == "New") {
+        newpm();
+        welcome();
+        voidl();
+    }
     
 
     else{
@@ -287,6 +316,11 @@ void opensuse() {
     }
     else if (input == "snap" || input == "Snap") {
         snap();
+        welcome();
+        opensuse();
+    }
+        else if (input == "new" || input == "New") {
+        newpm();
         welcome();
         opensuse();
     }
@@ -378,6 +412,12 @@ void arch() {
         archwelcome();
         arch();
     }
+    else if (input == "new" || input == "New") {
+        newpm();
+        welcome();
+        archwelcome();
+        arch();
+    }
     
 
     else{
@@ -394,7 +434,7 @@ void deb() {
     std::cin >> input;
     if (input == "update" || input == "Update") {
         clear
-        system("sudo nala update");
+        system("sudo apt update");
         welcome();
         deb();
     }
@@ -405,7 +445,7 @@ void deb() {
             std::string input;
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
-            system(("sudo nala install " + input).c_str());
+            system(("sudo apt install " + input).c_str());
             welcome();
             deb();
     }
@@ -414,7 +454,7 @@ void deb() {
             std::string input;
             std::cout << "Enter packages name(s): ";
             std::cin >> input;
-            system(("sudo nala remove " + input).c_str());
+            system(("sudo apt remove " + input).c_str());
             welcome();
             deb();
     }
@@ -436,6 +476,11 @@ void deb() {
     }
     else if (input == "pip" || input == "Pip") {
         pip();
+        welcome();
+        deb();
+    }
+    else if (input == "new" || input == "New") {
+        newpm();
         welcome();
         deb();
     }
@@ -500,6 +545,11 @@ void fed() {
         welcome();
         fed();
     }
+    else if (input == "new" || input == "New") {
+        newpm();
+        welcome();
+        fed();
+    }
     
 
     else{
@@ -527,7 +577,9 @@ void fst() {
         //creates files for arch
     }
     else if (input == "debian" || input == "Debian") {
-        debianinstall();
+        std::cout << "Setting configuration for Debian" << std::endl;
+        system("sudo mkdir /usr/aiopm");
+        system("sudo touch /usr/aiopm/a2.cw");
     }
     else if (input == "fedora" || input == "Fedora") {
         std::cout << "Setting configuration for Fedora" << std::endl;
