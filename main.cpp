@@ -58,27 +58,23 @@ void archwelcome() {
 }
 
 void aur() {
-    clear
-    //Aur downloader 
+    std::ifstream file("/usr/bin/eaur");
+    //Checks is eaur is installed
+    if (file.is_open()) {
+        file.close();
+
+    } else {
+        std::cout << "EAUR is not installed!\n";
+        exit(1);
+    }
+    file.close();
+    std::cout << "What package do you want to download?";
     std::string input;
-    std::cout << "Enter packages name(s): ";
     std::cin >> input;
-    if (input == "exit" || input == "Exit") {
-        std::cout << "Exiting..." << std::endl;
-    }
-    else {
-    std::cout << "Installing " << input << "..." << std::endl;
-    //makes sure the directory is writable
-    system("sudo chown -R $USER /usr/aiopm");
-    //clones the repository to /usr/aiopm/nameoftherepo
-    system(("git clone https://aur.archlinux.org/" + input + ".git " + "/usr/aiopm/" + input ).c_str());
-    //makes the package
-    system(("cd /usr/aiopm/" + input + " && makepkg -si").c_str());
-    std::cout << "Installation complete!" << std::endl;
-    system("read -p 'Press Enter to continue...'");
-    }
-    
+    system(("eaur " + input).c_str());
 }
+    
+
 void flatpak() {
     clear
     std::cout << "You are now managing flatpak" << std::endl;
