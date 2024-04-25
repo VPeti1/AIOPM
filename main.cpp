@@ -58,20 +58,20 @@ void archwelcome() {
 }
 
 void aur() {
-    std::ifstream file("/usr/bin/eaur");
+    std::ifstream file("/usr/bin/yay");
     //Checks is eaur is installed
     if (file.is_open()) {
         file.close();
 
     } else {
-        std::cout << "EAUR is not installed!\n";
+        std::cout << "Yay is not installed!\n";
         exit(1);
     }
     file.close();
     std::cout << "What package do you want to download?";
     std::string input;
     std::cin >> input;
-    system(("eaur " + input).c_str());
+    system(("yay -S " + input).c_str());
 }
     
 
