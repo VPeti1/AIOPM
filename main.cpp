@@ -4,43 +4,20 @@
 #include <string>
 #include <thread>
 #include <fstream>
-#include <stdio.h>
 #include <unistd.h>
+#include <stdexcept>
+#include <sys/stat.h>
 #define clear std::cout << "\033[2J\033[1;1H";
 using namespace std;
 
 
-void newpm() {
-    std::ifstream file("/bin/pm");
-    //Checks is AIOPM Plus is installed
-    if (file.is_open()) {
-        file.close();
-        std::cout << "New AIOPM is already installed!";
-
-    } else {
-        file.close();
-        std::cout << "Installing new AIOPM";
-        system("sudo wget https://raw.githubusercontent.com/VPeti1/AIOPM_Plus/main/installer.ut -O /usr/aiopmi/new.out");
-        system("sudo chmod +x /usr/aiopmi/new.out");
-        system("/usr/aiopmi/new.out");
-        sleep(0.5);
-        std::cout << "Returning to main menu...";
-    }
-    
-
+std::string checkpm(const std::string& name) {
+    std::string path = "/usr/bin/" + name;
+    struct stat buffer; 
+    int result = (stat(path.c_str(), &buffer) == 0 ? 0 : 1);
+    return std::to_string(result);
 }
 
-void checknew() {
-    std::ifstream file("/bin/pm");
-    //Checks is AIOPM Plus is installed
-    if (file.is_open()) {
-        file.close();
-
-    } else {
-    file.close();
-    std::cout << "Type 'new' to install AIOPM Plus" << std::endl;
-}
-}
 
 
 void welcome() {
@@ -50,7 +27,7 @@ void welcome() {
     std::cout << "Type 'flatpak' for managing flatpak" << std::endl;
     std::cout << "Type 'snap' for managing snap" << std::endl;
     std::cout << "Type 'pip' for managing pip" << std::endl;
-    checknew();
+    
 }
 void archwelcome() {
     std::cout << "Type in 'aur' to download packages from the AUR" << std::endl;
@@ -76,6 +53,12 @@ void aur() {
     
 
 void flatpak() {
+    std::string check = checkpm("flatpak");
+    if (check == "1") {
+        std::cout << "You don't have that package manager installed";
+        exit(1);
+    }
+
     clear
     std::cout << "You are now managing flatpak" << std::endl;
     std::cout << "Avalible commands:'update','install','remove','exit' " << std::endl;
@@ -121,6 +104,11 @@ void flatpak() {
 }
 
 void pip() {
+    std::string check = checkpm("pip");
+    if (check == "1") {
+        std::cout << "You don't have that package manager installed";
+        exit(1);
+    }
     clear
     std::cout << "You are now managing pip" << std::endl;
     std::cout << "Avalible commands:'install','remove','exit' " << std::endl;
@@ -161,6 +149,11 @@ void pip() {
 }
 
 void snap() {
+    std::string check = checkpm("snap");
+    if (check == "1") {
+        std::cout << "You don't have that package manager installed";
+        exit(1);
+    }
     clear
     std::cout << "You are now managing snap" << std::endl;
     std::cout << "Avalible commands:'install','remove','exit' " << std::endl;
@@ -249,11 +242,7 @@ void voidl() {
         welcome();
         voidl();
     }
-    else if (input == "new" || input == "New") {
-        newpm();
-        welcome();
-        voidl();
-    }
+
     
 
     else{
@@ -312,11 +301,6 @@ void opensuse() {
     }
     else if (input == "snap" || input == "Snap") {
         snap();
-        welcome();
-        opensuse();
-    }
-        else if (input == "new" || input == "New") {
-        newpm();
         welcome();
         opensuse();
     }
@@ -408,12 +392,6 @@ void arch() {
         archwelcome();
         arch();
     }
-    else if (input == "new" || input == "New") {
-        newpm();
-        welcome();
-        archwelcome();
-        arch();
-    }
     
 
     else{
@@ -475,12 +453,6 @@ void deb() {
         welcome();
         deb();
     }
-    else if (input == "new" || input == "New") {
-        newpm();
-        welcome();
-        deb();
-    }
-    
 
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
@@ -541,11 +513,6 @@ void fed() {
         welcome();
         fed();
     }
-    else if (input == "new" || input == "New") {
-        newpm();
-        welcome();
-        fed();
-    }
     
 
     else{
@@ -568,28 +535,28 @@ void fst() {
     std::cin >> input;
     if (input == "arch" || input == "Arch") {
         std::cout << "Setting configuration for Arch" << std::endl;
-        system("sudo mkdir /usr/aiopm");
-        system("sudo touch /usr/aiopm/a1.cw");
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a1.cw");
         //creates files for arch
     }
     else if (input == "debian" || input == "Debian") {
         std::cout << "Setting configuration for Debian" << std::endl;
-        system("sudo mkdir /usr/aiopm");
-        system("sudo touch /usr/aiopm/a2.cw");
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a2.cw");
     }
     else if (input == "fedora" || input == "Fedora") {
         std::cout << "Setting configuration for Fedora" << std::endl;
-        system("sudo mkdir /usr/aiopm");
-        system("sudo touch /usr/aiopm/a3.cw");
+        system("sudo mkdir /etc/aiopm");
+        system("sudo touch /etc/aiopm/a3.cw");
         //creates files for fedora
     }
     else if (input == "opensuse" || input == "Opensuse") {
-        system("sudo mkdir /usr/aiopm");
+        system("sudo mkdir /etc/aiopm");
         system("sudo touch /usr/aiopm/a4.cw");
     }
     else if (input == "void" || input == "Void") {
         system("sudo mkdir /usr/aiopm");
-        system("sudo touch /usr/aiopm/a5.cw");
+        system("sudo touch /etc/aiopm/a5.cw");
     }
     else{
         std::cout << "Invalid input! Retrying" << std::endl;
@@ -618,7 +585,7 @@ int main() {
     cout << "By VPeti" << endl;
     sleep(2);
     //no more libchrono
-    std::ifstream file("/usr/aiopm/a1.cw");
+    std::ifstream file("/etc/aiopm/a1.cw");
     //arch file
     if (file.is_open()) {
         file.close();
@@ -627,7 +594,7 @@ int main() {
         arch();
     } else {
     //debian file
-    std::ifstream file("/usr/aiopm/a2.cw");
+    std::ifstream file("/etc/aiopm/a2.cw");
     if (file.is_open()) {
         file.close();
         welcome();
@@ -635,7 +602,7 @@ int main() {
     }
     else {
         //fedora file
-        std::ifstream file("/usr/aiopm/a3.cw");
+        std::ifstream file("/etc/aiopm/a3.cw");
     if (file.is_open()) {
         file.close();
         welcome();
@@ -643,7 +610,7 @@ int main() {
     }
     else {
     //opensuse file
-    std::ifstream file("/usr/aiopm/a4.cw");
+    std::ifstream file("/etc/aiopm/a4.cw");
     if (file.is_open()) {
         file.close();
         welcome();
@@ -651,7 +618,7 @@ int main() {
     }
     else {
     //fedora file
-    std::ifstream file("/usr/aiopm/a5.cw");
+    std::ifstream file("/etc/aiopm/a5.cw");
     if (file.is_open()) {
         file.close();
         welcome();
